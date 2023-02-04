@@ -1,12 +1,9 @@
-import ProductDatabase from "../db/product-database.js"
-class Render{
-    constructor(){
-        
-    }
+import PRODUCT_HANDLER from "../db/product-database.js"
+import SHOPPING_CART from "../db/shopping-cart.js"
 
-    generateProducts = () =>{
-        const promisse = new Promise((resolve, reject) =>{
-            const products = ProductDatabase.getProducts().reduce((acc, product) =>{
+class Render {
+    generateProducts = () => {
+            const products = PRODUCT_HANDLER.getProducts().reduce((acc, product) => {
                 return acc += `
                 <div class="productCard" id="product-${product.getId()}">
                     <div class="image-area">
@@ -28,10 +25,34 @@ class Render{
                 </div>
                 `
             }, "")
-            resolve(products)
-            reject(new Error("Ocorreu um erro"))
-        })
-        return promisse
+        return products
+    }
+
+    generateProductsIntoCart = () => {
+        return SHOPPING_CART.getProducts().reduce((acc, product) => {
+            acc += `
+            <tr class="product-row">
+                <td>
+                    <div class="product-description">
+                        <img src="${product.getImg()}" alt="" width="90">
+                        <p>${product.getName()}</p>
+                    </div>
+                </td>
+                <td>R$ ${product.getPrice()}</td>
+                <td>
+                    <div class="buttons-block">
+                        <button class="button-add"></button>
+                        <input type="number" value="1" min="1" disabled>
+                        <button class="button-rm"></button>
+                    </div>
+                </td>
+                <td>
+                    <button class="remove-btn">Remover</button>
+                </td>
+            </tr>
+            `
+            return acc
+        }, "")
     }
 }
 

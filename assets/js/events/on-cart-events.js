@@ -12,7 +12,7 @@ function cartEvent(event){
     const id = productCard.id.split("-")[1]
 
     const productObject = PRODUCT_HANDLER.getProductById(Number(id))
-    SHOPPING_CART.addProductToCart(productObject)
+    SHOPPING_CART.addProduct(productObject)
 }
 
 
