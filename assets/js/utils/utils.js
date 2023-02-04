@@ -10,9 +10,25 @@ const SYMBOLS = {
 const geraId = {
     _id:0,
     get id(){
-        return this._id++;
+        return ++this._id;
     }
 }
 
+function callToast(text, colorFrom = "#00b09b", colorTo="#96c93d", position = "left"){
+    Toastify({
+        text,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position, // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+          background: `linear-gradient(to right, ${colorFrom}, ${colorTo})`,
+        },
+        onClick: function(){} // Callback after click
+      }).showToast();
+}
 
-export { geraId, SYMBOLS }
+
+export { geraId, SYMBOLS, callToast }

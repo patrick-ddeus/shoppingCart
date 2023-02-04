@@ -1,12 +1,13 @@
 import { geraId, SYMBOLS } from "../utils/utils.js"
-import ProductBuilder from "./product-builder.js"
+import ProductBuilder from "../model/ProductModel.js"
 
-class ProductDatabase {
+class ProductController {
     constructor() {
         this[SYMBOLS.PRODUCTS_LIST] = []
     }
 
     addProduct(productObj) {
+        // Verifica se o produto existe, se caso existir para a função
         if (this.getProductById(productObj.getId())) return
 
         this[SYMBOLS.PRODUCTS_LIST].push(productObj)
@@ -49,23 +50,26 @@ class ProductDatabase {
     }
 
     loadProducts() {
-        const promise = new Promise((resolve) => {
+        const promise = new Promise((resolve, reject) => {
             const database = JSON.parse(localStorage.getItem("database"))
-            const id = JSON.parse(localStorage.getItem("id"))
+            const id = JSON.parse(localStorage.getItem("id")) 
 
             // Cria novos objetos a partir da classe ProductBuilder para inserir na página novamente
-            const newDatabase = database.map(({ name, price, brand, img }) => {
-                return new ProductBuilder(name, price, brand, img)
+            const newDatabase = database.map(({id, name, price, brand, img }) => {
+                const produto = new ProductBuilder(name, price, brand, img)
+                produto.setId(id)
+                return produto
             })
 
             this[SYMBOLS.PRODUCTS_LIST] = newDatabase
             geraId._id = id
             resolve("Ok")
+            reject("Não foi possível inserir gerar os produtos")
         })
         return promise
     }
 }
 
-const PRODUCT_HANDLER = new ProductDatabase()
+const PRODUCT_HANDLER = new ProductController()
 
 export default PRODUCT_HANDLER

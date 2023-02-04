@@ -1,14 +1,19 @@
-import ProductBuilder from "./product-builder.js"
-class ShoppingCart {
+import ProductBuilder from "../model/ProductModel.js"
+import { callToast } from "../utils/utils.js"
+
+class CartController {
     constructor() {
         this.produtos = []
     }
 
     addProduct = (productObject) => {
+        const productExist = this.produtos.find(product => product.getId() === productObject.getId())
+        if(productExist) return callToast(`Produto já adicionado`, "#FFDD00", "#FBB034")
+        
         this.removeProducts(productObject.getId())
-
-        this.produtos.push(productObject)
         console.log(this.produtos)
+        
+        this.produtos.push(productObject)
         this.saveProducts()
     }
 
@@ -22,10 +27,11 @@ class ShoppingCart {
     }
 
     getProducts = () => {
-        return [...this.produtos]
+        return [...this.produtos];
     }
 
     saveProducts() {
+        console.log("Produto Salvo")
         const productsForSave = this.produtos.map(product => {
             return {
                 id: product.getId(),
@@ -41,16 +47,19 @@ class ShoppingCart {
 
     loadProducts() {
         const cart = JSON.parse(localStorage.getItem("cart"))
-
+        if(!cart) return
         // Cria novos objetos a partir da classe ProductBuilder para inserir na página novamente
-        const newDatabase = cart.map(({ name, price, brand, img }) => {
-            return new ProductBuilder(name, price, brand, img)
+        const newDatabase = cart.map(({id, name, price, brand, img }) => {
+            const produto = new ProductBuilder(name, price, brand, img)
+            produto.setId(id)
+            console.log(produto)
+            return produto
         })
 
         this.produtos = newDatabase
     }
 }
 
-const SHOPPING_CART = new ShoppingCart
+const SHOPPING_CART = new CartController;
 
 export default SHOPPING_CART

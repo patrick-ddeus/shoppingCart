@@ -1,5 +1,5 @@
-import PRODUCT_HANDLER from "../db/product-database.js"
-import SHOPPING_CART from "../db/shopping-cart.js"
+import PRODUCT_HANDLER from "../controllers/ProductController.js"
+import SHOPPING_CART from "../controllers/CartController.js"
 
 function insertCartEvents(){
     const carts = document.querySelectorAll(".cart")

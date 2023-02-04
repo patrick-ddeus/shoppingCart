@@ -13,6 +13,10 @@ class ProductBuilder {
         return this[SYMBOLS.ID];
     }
 
+    setId(id){
+        return this[SYMBOLS.ID] = id
+    }
+
     getName() {
         return this[SYMBOLS.NAME];
     }
