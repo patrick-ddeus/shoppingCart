@@ -8,7 +8,7 @@ class ProductDatabase {
 
     addProduct(productObj) {
         if(this.getProductById(productObj.getId())) return
-        
+
         this[SYMBOLS.PRODUCTS_LIST].push(productObj)
         this.saveProducts()
     }
@@ -27,9 +27,9 @@ class ProductDatabase {
     }
 
     getProductById(id){
-        const product = this[SYMBOLS.PRODUCTS_LIST].find(databaseProduct => databaseProduct.getId() === id)
-        if(!product) return
-        return product
+        const found = this[SYMBOLS.PRODUCTS_LIST].find(product => product.getId() === id)
+        if(!found) return
+        return found
     }
 
     saveProducts() {
@@ -57,7 +57,5 @@ PRODUCT_HANDLER.addProduct(new ProductBuilder("Long-Sleeved Dress Shirt", 40, "o
 PRODUCT_HANDLER.addProduct(new ProductBuilder("Cartoon Astronaut T-Shirts", 90, "nike", "assets/img/zadig.png"))
 PRODUCT_HANDLER.addProduct(new ProductBuilder("Gray Long-Sleeved Shirt", 110, "adidas", "assets/img/greyshirt.png"))
 PRODUCT_HANDLER.addProduct(new ProductBuilder("Over Under Pink T-Shirt", 78, "adidas", "assets/img/pink.png"))
-
-console.log(PRODUCT_HANDLER.getProductById(0))
 
 export default PRODUCT_HANDLER
