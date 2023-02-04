@@ -24,6 +24,12 @@ class ProductDatabase {
         return [...this[SYMBOLS.PRODUCTS_LIST]]
     }
 
+    getProductById(id){
+        const product = this[SYMBOLS.PRODUCTS_LIST].find(databaseProduct => databaseProduct.getId() === id)
+        if(!product) return alert("Produto não encontrado")
+        return product
+    }
+
     saveProducts() {
         localStorage.setItem("database", JSON.stringify(this[SYMBOLS.PRODUCTS_LIST]))
         localStorage.setItem("id", JSON.stringify(geraId._id))
@@ -41,13 +47,15 @@ class ProductDatabase {
 
 const PRODUCT_HANDLER = new ProductDatabase()
 
-PRODUCT_HANDLER.addProduct(new ProductBuilder("Cartoon Astronaut T-Shirts", 98, "adidas", "assets/img/greyshirt.png"))
-PRODUCT_HANDLER.addProduct(new ProductBuilder("Cartoon Astronaut T-Shirts", 90, "nike", "assets/img/orange-shirt.png"))
-PRODUCT_HANDLER.addProduct(new ProductBuilder("Cartoon Astronaut T-Shirts", 110, "adidas", "assets/img/pink.png"))
-PRODUCT_HANDLER.addProduct(new ProductBuilder("Cartoon Astronaut T-Shirts", 60, "oakley", "assets/img/red-shirt.png"))
-PRODUCT_HANDLER.addProduct(new ProductBuilder("Grandkids T Shirt Design", 40, "oakley", "assets/img/roupa3.jpg"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Gray Long-Sleeved Shirt", 98, "adidas", "assets/img/greyshirt.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Clever Land Orange T-Shirt", 90, "nike", "assets/img/orange-shirt.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Over Under Pink T-Shirt", 110, "adidas", "assets/img/pink.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Black Isle T-shirt", 60, "oakley", "assets/img/red-shirt.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Long-Sleeved Dress Shirt", 40, "oakley", "assets/img/roupa3.jpg"))
 PRODUCT_HANDLER.addProduct(new ProductBuilder("Cartoon Astronaut T-Shirts", 90, "nike", "assets/img/zadig.png"))
-PRODUCT_HANDLER.addProduct(new ProductBuilder("Cartoon Astronaut T-Shirts", 110, "adidas", "assets/img/greyshirt.png"))
-PRODUCT_HANDLER.addProduct(new ProductBuilder("Cartoon Astronaut T-Shirts", 78, "adidas", "assets/img/pink.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Gray Long-Sleeved Shirt", 110, "adidas", "assets/img/greyshirt.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Over Under Pink T-Shirt", 78, "adidas", "assets/img/pink.png"))
+
+console.log(PRODUCT_HANDLER.getProductById(0))
 
 export default PRODUCT_HANDLER

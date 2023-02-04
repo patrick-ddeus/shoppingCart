@@ -8,7 +8,7 @@ class Render{
     generateProducts = () =>{
         const products = this.products.reduce((acc, product) =>{
             return acc += `
-            <div class="productCard">
+            <div class="productCard" id="product-${product.getId()}">
                 <div class="image-area">
                 <a href="${product.getImg()}"><img src="${product.getImg()}" alt=""></a>
                 </div>
