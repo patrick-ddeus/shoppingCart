@@ -1,9 +1,9 @@
-import PRODUCT_HANDLER from "../controllers/ProductController.js"
-import SHOPPING_CART from "../controllers/CartController.js"
+import ProductController from "../controllers/ProductController.js"
+import CartController from "../controllers/CartController.js"
 
 class Render {
     generateProducts = () => {
-            const products = PRODUCT_HANDLER.getProducts().reduce((acc, product) => {
+            const products = ProductController.getProducts().reduce((acc, product) => {
                 return acc += `
                 <div class="productCard" id="product-${product.getId()}">
                     <div class="image-area">
@@ -29,7 +29,7 @@ class Render {
     }
 
     generateProductsIntoCart = () => {
-        return SHOPPING_CART.getProducts().reduce((acc, product) => {
+        return CartController.getProductsFromCart().reduce((acc, product) => {
             acc += `
             <tr class="product-row">
                 <td>

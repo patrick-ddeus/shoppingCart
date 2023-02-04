@@ -1,5 +1,5 @@
-import PRODUCT_HANDLER from "../controllers/ProductController.js"
-import SHOPPING_CART from "../controllers/CartController.js"
+import ProductController from "../controllers/ProductController.js"
+import CartController from "../controllers/CartController.js"
 
 function insertCartEvents(){
     const carts = document.querySelectorAll(".cart")
@@ -11,8 +11,8 @@ function cartEvent(event){
     const productCard = cartIcon.parentElement.parentElement
     const id = productCard.id.split("-")[1]
 
-    const productObject = PRODUCT_HANDLER.getProductById(Number(id))
-    SHOPPING_CART.addProduct(productObject)
+    const productObject = ProductController.getProductById(Number(id))
+    CartController.addProductToCart(productObject)
 }
 
 

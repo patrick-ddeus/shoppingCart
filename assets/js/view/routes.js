@@ -1,25 +1,25 @@
-import PRODUCT_HANDLER from "../controllers/ProductController.js"
-import SHOPPING_CART from "../controllers/CartController.js";
+import ProductController from "../controllers/ProductController.js"
+import CartController from "../controllers/CartController.js";
 import Render from "../view/render.js"
-import { insertCartEvents } from "../events/on-cart-events.js";
+import StartEvents from "../events/start-events.js";
 
 class Router {
-    constructor(routes){
+    constructor(routes) {
         this.routes = routes
     }
 
-    start(){
+    start() {
         const currentPath = location.pathname
         const findRoute = this.routes.find(page => page.path === currentPath || page.pathOptional == currentPath)
-        
-        if(findRoute){
+
+        if (findRoute) {
             findRoute.onEnter()
         }
     }
 
-    get(path){
+    get(path) {
         const findRoute = this.routes.find(page => page.path === path)
-        if(findRoute && location.pathname !== path){
+        if (findRoute && location.pathname !== path) {
             window.location.pathname = `${path}`
             findRoute.onEnter()
         }
@@ -29,24 +29,23 @@ class Router {
 const router = new Router([
     {
         path: "/",
-        pathOptional:"/index.html",
+        pathOptional: "/index.html",
         onEnter: () => {
-            SHOPPING_CART.loadProducts()
-            PRODUCT_HANDLER.loadProducts()
-                .then(() => {
-                    const productArea = document.querySelector(".productsArea")
-                    productArea.innerHTML = Render.generateProducts()
-                    insertCartEvents()
-                })
-                .catch(alert)
+            ProductController.loadProducts()
+            CartController.loadProducts(() => {
+                const productArea = document.querySelector(".productsArea")
+                productArea.innerHTML = Render.generateProducts()
+                StartEvents.onSelectProduct()
+            })
         }
     },
     {
         path: "/assets/pages/cart.html",
         onEnter: () => {
-            SHOPPING_CART.loadProducts()
-            const productAreaCart = document.querySelector(".products-list")
-            productAreaCart.innerHTML = Render.generateProductsIntoCart()
+            CartController.loadProducts(() => {
+                const productAreaCart = document.querySelector(".products-list")
+                productAreaCart.innerHTML = Render.generateProductsIntoCart()
+            })
         }
     }
 ])

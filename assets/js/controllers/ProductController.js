@@ -1,5 +1,5 @@
 import { geraId, SYMBOLS } from "../utils/utils.js"
-import ProductBuilder from "../model/ProductModel.js"
+import ProductBuilder from "../model/ProductBuilderModel.js"
 
 class ProductController {
     constructor() {
@@ -70,6 +70,4 @@ class ProductController {
     }
 }
 
-const PRODUCT_HANDLER = new ProductController()
-
-export default PRODUCT_HANDLER
+export default new ProductController
