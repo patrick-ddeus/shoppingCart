@@ -1,12 +1,11 @@
 import ProductDatabase from "../db/product-database.js"
 class Render{
     constructor(){
-        this.products = ProductDatabase.getProducts()
         this.productArea = document.querySelector(".productsArea")
     }
 
     generateProducts = () =>{
-        const products = this.products.reduce((acc, product) =>{
+        const products = ProductDatabase.getProducts().reduce((acc, product) =>{
             return acc += `
             <div class="productCard" id="product-${product.getId()}">
                 <div class="image-area">

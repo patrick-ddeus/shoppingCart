@@ -7,6 +7,8 @@ class ProductDatabase {
     }
 
     addProduct(productObj) {
+        if(this.getProductById(productObj.getId())) return
+        
         this[SYMBOLS.PRODUCTS_LIST].push(productObj)
         this.saveProducts()
     }
@@ -26,7 +28,7 @@ class ProductDatabase {
 
     getProductById(id){
         const product = this[SYMBOLS.PRODUCTS_LIST].find(databaseProduct => databaseProduct.getId() === id)
-        if(!product) return alert("Produto não encontrado")
+        if(!product) return
         return product
     }
 
