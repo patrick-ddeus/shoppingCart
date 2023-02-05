@@ -31,7 +31,7 @@ input[type=number] {
 }
 
 :root{
-    --primary-color: #937DC2;
+    --primary-color: #088178;
     --secundary-color: #7FBCD2;
     --product-image-area: #F9F5E7;
 }
@@ -74,9 +74,16 @@ input[type=number] {
     align-items: center;
 }
 
-.page-container .nav-list .nav-item{
+.page-container .nav-item a:not(.bag-link){
     font-weight: 500;
-    border-radius: 50px;
+    border-radius: 10px;
+    padding:10px;
+    transition:background .4s
+}
+
+.page-container .nav-item:hover a:not(.bag-link){
+    background-color: #e8f6ea;
+    color: var(--primary-color);
 }
 
 .page-container #header .bag-header {
@@ -137,11 +144,11 @@ input[type=number] {
 /* Product Card Area */
 
 #main #products .productCard {
-    background-color: var(--primary-color);
+    background-color: #fff;
 }
 
 .productCard .image-area {
-    background-color: var(--product-image-area);
+    background-color: #F1EFF1;
     width: 100%;
     height: 300px;
     border-radius: 30px;
@@ -199,7 +206,7 @@ input[type=number] {
     text-align: center;
     font-size: 36px;
     letter-spacing: 2px;
-    color: rgb(50, 10, 158);
+    color: var(--primary-color);
     margin-top: 40px;
     line-height: 2;
 }
@@ -350,6 +357,7 @@ th {
     font-family: inherit;
     cursor: pointer;
     font-size:17px;
+    margin-right:8px;
 }
 
 .confirm-area .column-right{
@@ -359,6 +367,7 @@ th {
 .confirm-area .column-right button{
     display:block;
     width:100%;
+    min-width:195px;
     height:50px;
     margin-bottom:10px;
     cursor: pointer;

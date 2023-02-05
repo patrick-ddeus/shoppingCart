@@ -10,7 +10,6 @@ class CartModel{
         const productExist = this.produtos.find(product => product.getId() === productObject.getId())
         if(productExist) return callToast(`Produto já adicionado`, "#FFDD00", "#FBB034")
         productObject.quantity = 1
-        console.log(productObject)
         this.produtos.push(productObject)
         this.saveProducts()
         callToast("Produto adicionado com sucesso!!", "#0BAB64", "#3BB78F", "center")
@@ -32,12 +31,16 @@ class CartModel{
     }
 
     updateProduct = (id, quantity) =>{
-
+        this.produtos.forEach(product =>{
+            if(product.getId() === Number(id)){
+                product.quantity = quantity
+            }
+        })
     }
 
     calculateTotal = () =>{
         const sum = this.produtos.reduce((acc, produto) =>{
-            acc += produto.getPrice()
+            acc += (produto.getPrice() * produto.quantity)
             return acc
         }, 0)
         return sum
@@ -46,6 +49,7 @@ class CartModel{
     saveProducts() {
         const productsForSave = this.produtos.map(product => {
             return {
+                quantity:product.quantity,
                 id: product.getId(),
                 name: product.getName(),
                 price: product.getPrice(),
@@ -60,10 +64,10 @@ class CartModel{
     loadProducts() {
         const cart = JSON.parse(localStorage.getItem("cart"))
         if(!cart) return
-        
         // Cria novos objetos a partir da classe ProductBuilder para inserir na página novamente
-        const newDatabase = cart.map(({id, name, price, brand, img }) => {
+        const newDatabase = cart.map(({id, name, price, brand, img, quantity }) => {
             const produto = new ProductBuilder(name, price, brand, img)
+            produto.quantity = quantity
             produto.setId(id)
             return produto
         })

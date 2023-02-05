@@ -40,7 +40,7 @@ class Render {
                 </td>
                 <td>R$ ${product.getPrice()}</td>
                 <td>
-                    <div class="buttons-block">
+                    <div class="buttons-block" id="quantity-${product.getId()}">
                         <button class="button-add"></button>
                         <input type="number" value="1" min="1" disabled>
                         <button class="button-rm"></button>

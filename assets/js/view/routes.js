@@ -45,7 +45,7 @@ const router = new Router([
         onEnter: () => {
             CartController.loadProducts(() => {
                 const productAreaCart = document.querySelector(".products-list")
-                productAreaCart.innerHTML = Render.generateProductsIntoCart()
+                productAreaCart.innerHTML += Render.generateProductsIntoCart()
                 StartEvents.onShoppingCartPage()
                 CartController.calculateTotalFromCart(updateTotalInHTML)
             })

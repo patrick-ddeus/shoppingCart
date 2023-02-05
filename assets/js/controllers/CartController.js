@@ -18,6 +18,10 @@ class CartController {
         }
     }
 
+    updateProductFromCart = (id, quantity) =>{
+        this.cartModel.updateProduct(id, quantity)
+    }
+
     calculateTotalFromCart = (callback) => {
         let total = Number(this.cartModel.calculateTotal())
         if(callback) callback(total)
