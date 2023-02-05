@@ -71,4 +71,15 @@ class ProductModel{
     }
 }
 
+const PRODUCT_HANDLER = new ProductModel()
+
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Gray Long-Sleeved Shirt", 98, "adidas", "https://images2.imgbox.com/7c/47/FH8vfglm_o.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Clever Land Orange T-Shirt", 90, "nike", "https://images2.imgbox.com/1d/45/CvEIaGXZ_o.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Over Under Pink T-Shirt", 110, "adidas", "https://images2.imgbox.com/4b/f9/KTb2CHQ2_o.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Black Isle T-shirt", 60, "oakley", "https://images2.imgbox.com/fe/f2/mr0aopOi_o.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Long-Sleeved Dress Shirt", 40, "oakley", "https://images2.imgbox.com/fb/1f/Gf6dHd5G_o.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Cartoon Astronaut T-Shirts", 90, "nike", "https://images2.imgbox.com/dc/c8/TvB8LRJF_o.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Black Triple Circle T-Shirt", 110, "adidas", "https://images2.imgbox.com/92/27/UvNoNQ27_o.png"))
+PRODUCT_HANDLER.addProduct(new ProductBuilder("Over Under Pink T-Shirt", 78, "adidas", "https://images2.imgbox.com/4b/f9/KTb2CHQ2_o.png"))
+
 export default ProductModel
