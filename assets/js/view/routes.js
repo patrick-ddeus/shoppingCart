@@ -11,7 +11,14 @@ class Router {
 
     start() {
         const currentPath = location.pathname
-        const findRoute = this.routes.find(page => page.path === currentPath || page.pathOptional == currentPath)
+        const currentHost = location.hostname
+        let findRoute = ""
+
+        if (currentHost === "localhost") {
+            findRoute = this.routes.find(page => page.pathsDev.includes(currentPath))
+        } else if (currentHost === "patrick-ddeus.github.io") {
+            findRoute = this.routes.find(page => page.pathsProd.includes(currentPath))
+        }
 
         if (findRoute) {
             findRoute.onEnter()
@@ -29,8 +36,8 @@ class Router {
 
 const router = new Router([
     {
-        path: "/frontendJSCart/",
-        pathOptional: "/frontendJSCart/index.html",
+        pathsDev: ["/", "/index.html"],
+        pathsProd: ["/frontendJSCart/", "/frontendJSCart/index.html"],
         onEnter: () => {
             ProductController.loadProducts()
             CartController.loadProducts(() => {
@@ -41,7 +48,8 @@ const router = new Router([
         }
     },
     {
-        path: "/frontendJSCart/assets/pages/cart.html",
+        pathsDev: ["/", "/index.html"],
+        pathsProd: ["/frontendJSCart/", "/frontendJSCart/index.html"],
         onEnter: () => {
             CartController.loadProducts((produtos) => {
                 const productAreaCart = document.querySelector(".products-list")
