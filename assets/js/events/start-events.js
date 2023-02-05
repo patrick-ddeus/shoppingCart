@@ -23,7 +23,7 @@ class StartEvents {
     }
     // @params
 
-    onShoppingCartPage(produtos) {
+    onShoppingCartPage() {
         // Eventos do botão de deletar do carrinho
         const removeBtn = document.querySelectorAll(".remove-btn")
         removeBtn.forEach(btn => {

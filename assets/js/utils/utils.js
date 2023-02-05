@@ -15,6 +15,7 @@ const geraId = {
 }
 
 function updateTotalInHTML(total) {
+    console.log(total)
     const totalSpan = document.querySelector(".total span");
     const formatedTotal = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
     totalSpan.innerHTML = formatedTotal;
