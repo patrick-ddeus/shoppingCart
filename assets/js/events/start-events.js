@@ -1,6 +1,7 @@
 import CartController from "../controllers/CartController.js"
 import ProductController from "../controllers/ProductController.js"
 import { updateTotalInHTML } from "../utils/utils.js"
+import { updateButton } from "../utils/buttonHandlers.js"
 
 class StartEvents {
     onSelectProduct() {
@@ -41,29 +42,16 @@ class StartEvents {
 
         addButton.forEach(btn => btn.addEventListener("click", e => {
             const button = e.currentTarget
-            const id = button.parentElement.id.split("-")[1]
-            const input = btn.nextElementSibling
-
-            input.value = Number(input.value) + 1
-            CartController.updateProductFromCart(id, Number(input.value))
+            updateButton(button, true)
         }))
 
         lessButton.forEach(btn => btn.addEventListener("click", e => {
             const button = e.currentTarget
-            const id = button.parentElement.id.split("-")[1]
-            const input = btn.previousElementSibling
-
-            input.value = Number(input.value) === 1 ? 1 : Number(input.value) - 1
-            CartController.updateProductFromCart(id, Number(input.value))
+            updateButton(button, false)
         }))
 
         updateQuantity.addEventListener("click", _=>{
             CartController.calculateTotalFromCart(updateTotalInHTML)
-        })
-        // 
-        const quantityInputs = document.querySelectorAll(".quantity-input")
-        quantityInputs.forEach((input, indice) => {
-            input.value = produtos[indice].quantity
         })
     }
 }

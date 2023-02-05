@@ -24,6 +24,12 @@ class CartController {
 
     calculateTotalFromCart = (callback) => {
         let total = Number(this.cartModel.calculateTotal())
+
+        const quantityInputs = document.querySelectorAll(".quantity-input")
+        quantityInputs.forEach((input, indice) => {
+            input.value = this.getProductsFromCart()[indice].quantity
+        })
+        
         if(callback) callback(total)
     }
 
