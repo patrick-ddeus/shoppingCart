@@ -42,12 +42,12 @@ class Render {
                 <td>
                     <div class="buttons-block" id="quantity-${product.getId()}">
                         <button class="button-add"></button>
-                        <input type="number" value="1" min="1" disabled>
+                        <input type="number" value="1" min="1" disabled class="quantity-input">
                         <button class="button-rm"></button>
                     </div>
                 </td>
                 <td>
-                    <button class="remove-btn " id="remove-${product.getId()}">Remover</button>
+                    <button class="remove-btn" id="remove-${product.getId()}">Remover</button>
                 </td>
             </tr>
             `

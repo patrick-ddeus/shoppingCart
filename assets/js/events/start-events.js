@@ -1,13 +1,28 @@
-import { insertCartEvents } from "./on-cart-events.js"
 import CartController from "../controllers/CartController.js"
+import ProductController from "../controllers/ProductController.js"
 import { updateTotalInHTML } from "../utils/utils.js"
 
 class StartEvents {
     onSelectProduct() {
+        function insertCartEvents(){
+            const carts = document.querySelectorAll(".cart")
+            carts.forEach(cart => cart.onclick = cartEvent)
+        }
+        
+        function cartEvent(event){
+            const cartIcon = event.currentTarget
+            const productCard = cartIcon.parentElement.parentElement
+            const id = productCard.id.split("-")[1]
+        
+            const productObject = ProductController.getProductById(Number(id))
+            CartController.addProductToCart(productObject)
+        }
+
         insertCartEvents()
     }
+    // @params
 
-    onShoppingCartPage() {
+    onShoppingCartPage(produtos) {
         // Eventos do botão de deletar do carrinho
         const removeBtn = document.querySelectorAll(".remove-btn")
         removeBtn.forEach(btn => {
@@ -46,6 +61,10 @@ class StartEvents {
             CartController.calculateTotalFromCart(updateTotalInHTML)
         })
         // 
+        const quantityInputs = document.querySelectorAll(".quantity-input")
+        quantityInputs.forEach((input, indice) => {
+            input.value = produtos[indice].quantity
+        })
     }
 }
 

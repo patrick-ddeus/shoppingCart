@@ -36,9 +36,9 @@ class CartController {
     }
 
     loadProducts(callback) {
-        this.cartModel.loadProducts()
+        const produtos = this.cartModel.loadProducts()
 
-        if (callback) callback()
+        if (callback) callback(produtos)
         
     }
 }

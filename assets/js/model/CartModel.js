@@ -36,6 +36,7 @@ class CartModel{
                 product.quantity = quantity
             }
         })
+        this.saveProducts()
     }
 
     calculateTotal = () =>{
@@ -73,6 +74,7 @@ class CartModel{
         })
 
         this.produtos = newDatabase
+        return this.produtos
     }
 }
 

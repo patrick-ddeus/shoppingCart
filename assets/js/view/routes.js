@@ -29,8 +29,8 @@ class Router {
 
 const router = new Router([
     {
-        path: "/frontendJSCart/",
-        pathOptional: "/frontendJSCart/index.html",
+        path: "/",
+        pathOptional: "/index.html",
         onEnter: () => {
             ProductController.loadProducts()
             CartController.loadProducts(() => {
@@ -41,12 +41,12 @@ const router = new Router([
         }
     },
     {
-        path: "/frontendJSCart/assets/pages/cart.html",
+        path: "/assets/pages/cart.html",
         onEnter: () => {
-            CartController.loadProducts(() => {
+            CartController.loadProducts((produtos) => {
                 const productAreaCart = document.querySelector(".products-list")
                 productAreaCart.innerHTML += Render.generateProductsIntoCart()
-                StartEvents.onShoppingCartPage()
+                StartEvents.onShoppingCartPage(produtos)
                 CartController.calculateTotalFromCart(updateTotalInHTML)
             })
         }

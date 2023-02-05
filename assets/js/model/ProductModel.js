@@ -2,7 +2,7 @@ import { geraId, SYMBOLS } from "../utils/utils.js"
 import ProductBuilder from "../model/ProductBuilderModel.js"
 
 
-class ProductModel{
+class ProductModel {
     constructor() {
         this[SYMBOLS.PRODUCTS_LIST] = []
     }
@@ -51,23 +51,18 @@ class ProductModel{
     }
 
     loadProducts() {
-        const promise = new Promise((resolve, reject) => {
-            const database = JSON.parse(localStorage.getItem("database"))
-            const id = JSON.parse(localStorage.getItem("id")) 
+        const database = JSON.parse(localStorage.getItem("database"))
+        const id = JSON.parse(localStorage.getItem("id"))
 
-            // Cria novos objetos a partir da classe ProductBuilder para inserir na página novamente
-            const newDatabase = database.map(({id, name, price, brand, img }) => {
-                const produto = new ProductBuilder(name, price, brand, img)
-                produto.setId(id)
-                return produto
-            })
-
-            this[SYMBOLS.PRODUCTS_LIST] = newDatabase
-            geraId._id = id
-            resolve("Ok")
-            reject("Não foi possível inserir gerar os produtos")
+        // Cria novos objetos a partir da classe ProductBuilder para inserir na página novamente
+        const newDatabase = database.map(({ id, name, price, brand, img }) => {
+            const produto = new ProductBuilder(name, price, brand, img)
+            produto.setId(id)
+            return produto
         })
-        return promise
+
+        this[SYMBOLS.PRODUCTS_LIST] = newDatabase
+        geraId._id = id
     }
 }
 
