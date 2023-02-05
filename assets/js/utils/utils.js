@@ -14,8 +14,8 @@ const geraId = {
     }
 }
 
-function updateTotalInHTML(total) {
-    const totalSpan = document.querySelector(".total span");
+function updatePricesInHtml(total, type) {
+    const totalSpan = document.querySelector(`.${type} span`);
     const formatedTotal = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
     totalSpan.innerHTML = formatedTotal;
   }
@@ -36,5 +36,23 @@ function callToast(text, colorFrom = "#00b09b", colorTo="#96c93d", position = "l
       }).showToast();
 }
 
+function validDescount(campo, msg, valid){
+  document.querySelector(".cupomDiv")?.remove()
+  const div = document.createElement("div")
+  div.innerHTML = msg
+  div.classList.add("cupomDiv")
+  
+  if(valid){
+    div.classList.add("valid-true")
+    campo.classList.remove("inputError")
+  }else{
+    div.classList.add("valid-false")
+    campo.classList.add("inputError")
+  }
+  
+  
+  campo.parentElement.insertAdjacentElement("afterend", div)
+}
 
-export { geraId, SYMBOLS, callToast , updateTotalInHTML}
+
+export { geraId, SYMBOLS, callToast , updatePricesInHtml, validDescount}

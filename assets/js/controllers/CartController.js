@@ -1,4 +1,4 @@
-import { updateTotalInHTML } from "../utils/utils.js"
+import { updatePricesInHtml } from "../utils/utils.js"
 import CartModel from "../model/CartModel.js"
 
 class CartController {
@@ -16,7 +16,8 @@ class CartController {
             tableRow.remove()
         }
 
-        this.calculateTotalFromCart(updateTotalInHTML)
+        this.calculateTotalFromCart((total) => updatePricesInHtml(total, "total"))
+        this.calculateSubTotalFromCart((subtotal) => updatePricesInHtml(subtotal, "subtotal"))
     }
 
     updateProductFromCart = (id, quantity) =>{
@@ -24,11 +25,16 @@ class CartController {
     }
 
     calculateTotalFromCart = (callback) => {
-        let total = Number(this.cartModel.calculateTotal())
+        const descount = document.querySelector(".descount span")
+        const descountNumber = descount.innerHTML.split(" ")[1]
+        const descountConvert = descountNumber.replace("," , ".")
+
+        const subTotal = Number(this.cartModel.calculateTotal())
+        const total = subTotal - Number(descountConvert)
         if(callback) callback(total)
     }
 
-    calculateSubTotalFromCart = () =>{
+    calculateSubTotalFromCart = (callback) =>{
         let total = Number(this.cartModel.calculateTotal())
         if(callback) callback(total)
     }

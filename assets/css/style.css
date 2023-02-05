@@ -315,7 +315,7 @@ th {
 #shopping-section .price-area p {
     border: 1px solid #ddd;
     margin-top: 20px;
-    padding: 20px 40px;
+    padding: 20px 20px 20px 40px;
     display: flex;
     align-items: center;
     gap: 10px;
@@ -347,6 +347,7 @@ th {
     height: 50px;
     padding: 0 16px;
     border-top: 1px solid #ddd;
+    border-left:0;
 }
 
 .confirm-area .column-left .input-area button {
@@ -359,6 +360,22 @@ th {
     cursor: pointer;
     font-size: 17px;
     margin-right: 8px;
+}
+
+.confirm-area .column-left .cupomDiv{
+    font-size:14px;
+}
+
+.confirm-area .column-left .inputError{
+    background-color:#fdd0d0;
+}
+
+.valid-true{
+    color:green;
+}
+
+.valid-false{
+    color:red;
 }
 
 .confirm-area .column-right {

@@ -1,5 +1,5 @@
 import CartController from "../controllers/CartController.js"
-import { updateTotalInHTML } from "./utils.js"
+import { updatePricesInHtml } from "./utils.js"
 
 export function updateButton(button, increment){
     const id = button.parentElement.id.split("-")[1]
@@ -9,5 +9,6 @@ export function updateButton(button, increment){
     input.value = input.value <= 1 ? 1 : input.value
 
     CartController.updateProductFromCart(id, Number(input.value))
-    CartController.calculateTotalFromCart(updateTotalInHTML)
+    CartController.calculateTotalFromCart((total) => updatePricesInHtml(total, "total"))
+    CartController.calculateSubTotalFromCart((subtotal) => updatePricesInHtml(subtotal, "subtotal"))
 }

@@ -1,6 +1,6 @@
 import CartController from "../controllers/CartController.js"
 import ProductController from "../controllers/ProductController.js"
-import { updateTotalInHTML } from "../utils/utils.js"
+import { updatePricesInHtml , validDescount } from "../utils/utils.js"
 import { updateButton } from "../utils/buttonHandlers.js"
 
 class StartEvents {
@@ -51,7 +51,24 @@ class StartEvents {
         }))
 
         updateQuantity.addEventListener("click", _=>{
-            CartController.calculateTotalFromCart(updateTotalInHTML)
+            CartController.calculateTotalFromCart((total) => updatePricesInHtml(total, "total"))
+            CartController.calculateSubTotalFromCart((subtotal) => updatePricesInHtml(subtotal, "subtotal"))
+        })
+
+        // 
+
+        const applyButton = document.querySelector(".apply-descount")
+        const input = applyButton.previousElementSibling;
+        const descount = document.querySelector(".descount span")
+        applyButton.addEventListener("click", _=>{
+            if(input.value === "giveme-stars"){
+                descount.innerHTML = `R$ 15,00`
+                validDescount(input, "Cupom inserido com sucesso!", true)
+            }else{
+                descount.innerHTML = `R$ 0,00`
+                validDescount(input, "Cupom inválido!", false)
+            }
+            CartController.calculateTotalFromCart((total) => updatePricesInHtml(total, "total"))
         })
     }
 }

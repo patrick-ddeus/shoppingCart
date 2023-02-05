@@ -2,7 +2,7 @@ import ProductController from "../controllers/ProductController.js"
 import CartController from "../controllers/CartController.js";
 import Render from "../view/render.js"
 import StartEvents from "../events/start-events.js";
-import { updateTotalInHTML } from "../utils/utils.js";
+import { updatePricesInHtml } from "../utils/utils.js";
 
 class Router {
     constructor(routes) {
@@ -57,7 +57,8 @@ const router = new Router([
                 const quantityInputs = document.querySelectorAll(".quantity-input")
                 
                 StartEvents.onShoppingCartPage()
-                CartController.calculateTotalFromCart(updateTotalInHTML)
+                CartController.calculateTotalFromCart((total) => updatePricesInHtml(total, "total"))
+                CartController.calculateSubTotalFromCart((total) => updatePricesInHtml(total, "subtotal"))
                 quantityInputs.forEach((input, indice) => {
                     input.value = produtos[indice].quantity
                 })
