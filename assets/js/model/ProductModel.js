@@ -1,7 +1,6 @@
 import { geraId, SYMBOLS } from "../utils/utils.js"
 import ProductBuilder from "../model/ProductBuilderModel.js"
 
-
 class ProductModel {
     constructor() {
         this[SYMBOLS.PRODUCTS_LIST] = []

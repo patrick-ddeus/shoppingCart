@@ -48,14 +48,19 @@ const router = new Router([
         }
     },
     {
-        pathsDev: ["/", "/index.html"],
+        pathsDev: ["/", "/assets/pages/cart.html"],
         pathsProd: ["/frontendJSCart/", "/frontendJSCart/assets/pages/cart.html"],
         onEnter: () => {
             CartController.loadProducts((produtos) => {
                 const productAreaCart = document.querySelector(".products-list")
                 productAreaCart.innerHTML += Render.generateProductsIntoCart()
-                StartEvents.onShoppingCartPage(produtos)
+                const quantityInputs = document.querySelectorAll(".quantity-input")
+                
+                StartEvents.onShoppingCartPage()
                 CartController.calculateTotalFromCart(updateTotalInHTML)
+                quantityInputs.forEach((input, indice) => {
+                    input.value = produtos[indice].quantity
+                })
             })
         }
     }

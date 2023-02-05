@@ -15,7 +15,7 @@ class CartController {
         if (tableRow) {
             tableRow.remove()
         }
-        
+
         this.calculateTotalFromCart(updateTotalInHTML)
     }
 
@@ -26,12 +26,11 @@ class CartController {
     calculateTotalFromCart = (callback) => {
         let total = Number(this.cartModel.calculateTotal())
         if(callback) callback(total)
+    }
 
-        const quantityInputs = document.querySelectorAll(".quantity-input")
-        quantityInputs.forEach((input, indice) => {
-            input.value = this.getProductsFromCart()[indice].quantity
-        })
-        
+    calculateSubTotalFromCart = () =>{
+        let total = Number(this.cartModel.calculateTotal())
+        if(callback) callback(total)
     }
 
     getProductsFromCart = () => {
@@ -44,9 +43,7 @@ class CartController {
 
     loadProducts(callback) {
         const produtos = this.cartModel.loadProducts()
-
         if (callback) callback(produtos)
-        
     }
 }
 
