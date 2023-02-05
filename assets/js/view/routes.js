@@ -29,8 +29,8 @@ class Router {
 
 const router = new Router([
     {
-        path: "/",
-        pathOptional: "/index.html",
+        path: "/frontendJSCart/",
+        pathOptional: "/frontendJSCart/index.html",
         onEnter: () => {
             ProductController.loadProducts()
             CartController.loadProducts(() => {
@@ -41,7 +41,7 @@ const router = new Router([
         }
     },
     {
-        path: "/assets/pages/cart.html",
+        path: "/frontendJSCart/assets/pages/cart.html",
         onEnter: () => {
             CartController.loadProducts((produtos) => {
                 const productAreaCart = document.querySelector(".products-list")
