@@ -49,7 +49,7 @@ const router = new Router([
     },
     {
         pathsDev: ["/", "/index.html"],
-        pathsProd: ["/frontendJSCart/", "/frontendJSCart/index.html"],
+        pathsProd: ["/frontendJSCart/", "/frontendJSCart/assets/pages/cart.html"],
         onEnter: () => {
             CartController.loadProducts((produtos) => {
                 const productAreaCart = document.querySelector(".products-list")
