@@ -2,6 +2,7 @@ import ProductController from "../controllers/ProductController.js"
 import CartController from "../controllers/CartController.js";
 import Render from "../view/render.js"
 import StartEvents from "../events/start-events.js";
+import { updateTotalInHTML } from "../utils/utils.js";
 
 class Router {
     constructor(routes) {
@@ -45,6 +46,8 @@ const router = new Router([
             CartController.loadProducts(() => {
                 const productAreaCart = document.querySelector(".products-list")
                 productAreaCart.innerHTML = Render.generateProductsIntoCart()
+                StartEvents.onShoppingCartPage()
+                CartController.calculateTotalFromCart(updateTotalInHTML)
             })
         }
     }

@@ -1,10 +1,8 @@
+import { updateTotalInHTML } from "../utils/utils.js"
 import CartModel from "../model/CartModel.js"
-import { callToast } from "../utils/utils.js"
-import Render from "../view/render.js"
 
 class CartController {
     constructor() {
-        this.produtos = []
         this.cartModel = new CartModel()
     }
 
@@ -12,8 +10,17 @@ class CartController {
         this.cartModel.addProduct(productObject)
     }
 
-    removeProductsFromCart = (id) => {
+    removeProductsFromCart = (id, tableRow) => {
         this.cartModel.removeProducts(id)
+        this.calculateTotalFromCart(updateTotalInHTML)
+        if (tableRow) {
+            tableRow.remove()
+        }
+    }
+
+    calculateTotalFromCart = (callback) => {
+        let total = Number(this.cartModel.calculateTotal())
+        if(callback) callback(total)
     }
 
     getProductsFromCart = () => {
@@ -26,8 +33,9 @@ class CartController {
 
     loadProducts(callback) {
         this.cartModel.loadProducts()
+
+        if (callback) callback()
         
-        if(callback) callback()
     }
 }
 

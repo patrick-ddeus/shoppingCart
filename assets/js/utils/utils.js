@@ -14,6 +14,12 @@ const geraId = {
     }
 }
 
+function updateTotalInHTML(total) {
+    const totalSpan = document.querySelector(".total span");
+    const formatedTotal = total.toLocaleString("pt-BR", { style: "currency", currency: "BRL" });
+    totalSpan.innerHTML = formatedTotal;
+  }
+
 function callToast(text, colorFrom = "#00b09b", colorTo="#96c93d", position = "left"){
     Toastify({
         text,
@@ -31,4 +37,4 @@ function callToast(text, colorFrom = "#00b09b", colorTo="#96c93d", position = "l
 }
 
 
-export { geraId, SYMBOLS, callToast }
+export { geraId, SYMBOLS, callToast , updateTotalInHTML}

@@ -9,25 +9,38 @@ class CartModel{
     addProduct = (productObject) => {
         const productExist = this.produtos.find(product => product.getId() === productObject.getId())
         if(productExist) return callToast(`Produto já adicionado`, "#FFDD00", "#FBB034")
-
-        this.removeProducts(productObject.getId())
-        
+        productObject.quantity = 1
+        console.log(productObject)
         this.produtos.push(productObject)
         this.saveProducts()
-        callToast("Produto adicionado com sucesso!!", "", "", "center")
+        callToast("Produto adicionado com sucesso!!", "#0BAB64", "#3BB78F", "center")
     }
 
     removeProducts = (id) => {
         this.produtos.forEach((product, indice) => {
-            if (product.getId() === id) {
+            if (product.getId() === Number(id)) {
                 this.produtos.splice(indice, 1)
+                callToast("Produto deletado com sucesso", "#DE3163", "#E0115F", "right")
                 return
             }
         })
+        this.saveProducts()
     }
 
     getProducts = () => {
         return [...this.produtos];
+    }
+
+    updateProduct = (id, quantity) =>{
+
+    }
+
+    calculateTotal = () =>{
+        const sum = this.produtos.reduce((acc, produto) =>{
+            acc += produto.getPrice()
+            return acc
+        }, 0)
+        return sum
     }
 
     saveProducts() {

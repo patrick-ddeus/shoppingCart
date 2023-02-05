@@ -3,7 +3,7 @@ import CartController from "../controllers/CartController.js"
 
 class Render {
     generateProducts = () => {
-            const products = ProductController.getProducts().reduce((acc, product) => {
+            const products = ProductController.getProductsFromDataBase().reduce((acc, product) => {
                 return acc += `
                 <div class="productCard" id="product-${product.getId()}">
                     <div class="image-area">
@@ -47,7 +47,7 @@ class Render {
                     </div>
                 </td>
                 <td>
-                    <button class="remove-btn">Remover</button>
+                    <button class="remove-btn " id="remove-${product.getId()}">Remover</button>
                 </td>
             </tr>
             `
