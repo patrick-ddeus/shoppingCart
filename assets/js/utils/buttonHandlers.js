@@ -8,7 +8,7 @@ export function updateButton(button, increment){
     input.value = Number(input.value) + (increment ? 1 : -1)
     input.value = input.value <= 1 ? 1 : input.value
 
-    CartController.updateProductFromCart(id, Number(input.value))
+    CartController.updateQuantityFromCart(id, Number(input.value))
     CartController.calculateTotalFromCart((total) => updatePricesInHtml(total, "total"))
     CartController.calculateSubTotalFromCart((subtotal) => updatePricesInHtml(subtotal, "subtotal"))
 }

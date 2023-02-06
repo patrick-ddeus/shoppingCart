@@ -30,7 +30,7 @@ class CartModel{
         return [...this.produtos];
     }
 
-    updateProduct = (id, quantity) =>{
+    updateQuantity = (id, quantity) =>{
         this.produtos.forEach(product =>{
             if(product.getId() === Number(id)){
                 product.quantity = quantity

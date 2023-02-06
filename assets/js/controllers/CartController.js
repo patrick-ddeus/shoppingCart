@@ -20,8 +20,8 @@ class CartController {
         this.calculateSubTotalFromCart((subtotal) => updatePricesInHtml(subtotal, "subtotal"))
     }
 
-    updateProductFromCart = (id, quantity) =>{
-        this.cartModel.updateProduct(id, quantity)
+    updateQuantityFromCart = (id, quantity) =>{
+        this.cartModel.updateQuantity(id, quantity)
     }
 
     calculateTotalFromCart = (callback) => {
