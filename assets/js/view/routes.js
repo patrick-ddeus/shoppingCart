@@ -40,11 +40,9 @@ const router = new Router([
         pathsProd: ["/frontendJSCart/", "/frontendJSCart/index.html"],
         onEnter: () => {
             ProductController.loadProducts()
-            CartController.loadProducts(() => {
-                const productArea = document.querySelector(".productsArea")
-                productArea.innerHTML = Render.generateProducts()
-                StartEvents.onSelectProduct()
-            })
+            CartController.loadProducts()
+            Render.generateProducts()
+            StartEvents.onSelectProduct()
         }
     },
     {
@@ -52,13 +50,11 @@ const router = new Router([
         pathsProd: ["/frontendJSCart/", "/frontendJSCart/assets/pages/cart.html"],
         onEnter: () => {
             CartController.loadProducts((produtos) => {
-                const productAreaCart = document.querySelector(".products-list")
-                productAreaCart.innerHTML += Render.generateProductsIntoCart()
-                const quantityInputs = document.querySelectorAll(".quantity-input")
-                
+                Render.generateProductsIntoCart()
                 StartEvents.onShoppingCartPage()
                 CartController.calculateTotalFromCart((total) => updatePricesInHtml(total, "total"))
                 CartController.calculateSubTotalFromCart((total) => updatePricesInHtml(total, "subtotal"))
+                const quantityInputs = document.querySelectorAll(".quantity-input")
                 quantityInputs.forEach((input, indice) => {
                     input.value = produtos[indice].quantity
                 })

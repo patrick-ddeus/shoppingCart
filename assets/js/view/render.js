@@ -3,6 +3,7 @@ import CartController from "../controllers/CartController.js"
 
 class Render {
     generateProducts = () => {
+        const productArea = document.querySelector(".productsArea")
             const products = ProductController.getProductsFromDataBase().reduce((acc, product) => {
                 return acc += `
                 <div class="productCard" id="product-${product.getId()}">
@@ -25,11 +26,12 @@ class Render {
                 </div>
                 `
             }, "")
-        return products
+        productArea.innerHTML = products
     }
 
     generateProductsIntoCart = () => {
-        return CartController.getProductsFromCart().reduce((acc, product) => {
+        const productAreaCart = document.querySelector(".products-list")
+        const products = CartController.getProductsFromCart().reduce((acc, product) => {
             acc += `
             <tr class="product-row">
                 <td>
@@ -53,6 +55,7 @@ class Render {
             `
             return acc
         }, "")
+        productAreaCart.innerHTML += products
     }
 }
 
